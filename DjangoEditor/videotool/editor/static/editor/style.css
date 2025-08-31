@@ -1,0 +1,19 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 20px; color: #111; }
+h2 { margin-top: 0; }
+.upload { margin-bottom: 16px; }
+.error { color: #c00; }
+.workspace { display: flex; gap: 24px; align-items: flex-start; }
+.left { display: flex; flex-direction: column; gap: 8px; }
+.right { display: flex; flex-direction: column; gap: 8px; }
+.muted { color: #666; font-size: 13px; }
+
+.toolbar { display: flex; gap: 8px; align-items: center; padding: 8px; background: #f4f4f4; border: 1px solid #ddd; border-radius: 8px; }
+.toolbar .sep { width: 1px; height: 28px; background: #ddd; margin: 0 4px; }
+.toolbar button { border: 1px solid #ccc; background: #fff; border-radius: 6px; padding: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.toolbar button.primary { background: #0a84ff; color: #fff; border-color: #0a84ff; }
+.toolbar button img { width: 18px; height: 18px; display: block; }
+.toolbar .tool.active { outline: 2px solid #0a84ff; }
+
+canvas#timeline { border: 1px solid #bbb; background: #222; border-radius: 8px; cursor: crosshair; }
+
+.hint { margin-top: -2px; }

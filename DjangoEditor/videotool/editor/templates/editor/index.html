@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Video Timeline Editor</title>
+  <link rel="stylesheet" href="/static/editor/style.css">
+</head>
+<body>
+  <h2>Video Timeline Editor</h2>
+
+  <form method="post" enctype="multipart/form-data" class="upload">
+    {% csrf_token %}
+    <input type="file" name="video" accept="video/*" required />
+    <button type="submit">Upload</button>
+    {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  </form>
+
+  {% if video_url %}
+  <div class="workspace">
+    <div class="left">
+      <video id="video" src="{{ video_url }}" controls width="760"></video>
+      <div id="meta" class="muted"></div>
+      <div class="toolbar">
+        <button class="tool" data-tool="select" title="Select (V)">
+          <img src="/static/editor/icons/cursor.svg" alt="Select">
+        </button>
+        <button class="tool active" data-tool="clip" title="Clip (C)">
+          <img src="/static/editor/icons/scissors.svg" alt="Clip">
+        </button>
+        <div class="sep"></div>
+        <button id="btnMarkIn" title="Mark In (I)">
+          <img src="/static/editor/icons/mark-in.svg" alt="In">
+        </button>
+        <button id="btnMarkOut" title="Mark Out (O)">
+          <img src="/static/editor/icons/mark-out.svg" alt="Out">
+        </button>
+        <div class="sep"></div>
+        <button id="btnDelete" title="Delete Selection (Del/D)">
+          <img src="/static/editor/icons/delete.svg" alt="Delete">
+        </button>
+        <button id="btnUndo" title="Undo">
+          <img src="/static/editor/icons/undo.svg" alt="Undo">
+        </button>
+        <button id="btnClear" title="Clear All">
+          <img src="/static/editor/icons/clear.svg" alt="Clear">
+        </button>
+        <div class="sep"></div>
+        <button id="btnSave" title="Save Project (S)">
+          <img src="/static/editor/icons/save.svg" alt="Save">
+        </button>
+        <button id="btnLoad" title="Load Project (L)">
+          <img src="/static/editor/icons/load.svg" alt="Load">
+        </button>
+        <div class="sep"></div>
+        <button id="btnExport" class="primary" title="Export (X)">
+          <img src="/static/editor/icons/export.svg" alt="Export"><span>Export</span>
+        </button>
+      </div>
+      <div class="hint muted">Tools: V=Select, C=Clip | I=In, O=Out | Del/D=Delete | S=Save | L=Load | X=Export</div>
+    </div>
+
+    <div class="right">
+      <canvas id="timeline" width="1100" height="180"></canvas>
+      <div id="info" class="muted"></div>
+    </div>
+  </div>
+
+  <script>
+    const videoName = "{{ video_name|default_if_none:'' }}";
+  </script>
+  <script src="/static/editor/app.js"></script>
+  {% else %}
+  <p class="muted">Upload a video to begin editing.</p>
+  {% endif %}
+</body>
+</html>
